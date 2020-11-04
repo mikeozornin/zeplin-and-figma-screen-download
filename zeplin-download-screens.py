@@ -3,7 +3,6 @@ import sys
 import requests
 import logging
 import time
-import os
 
 from common import download, get_image_folder_name
 from config import ZEPLIN_API_TOKEN
@@ -26,11 +25,6 @@ def get_checkpoint():
     with open(CHECKPOINT_FILE_NAME, 'r') as file:
         checkpoint = file.read()
         return int(checkpoint)
-
-
-def init_checkpoint():
-    yesterday = datetime.date.today() - datetime.timedelta(1)
-    print(yesterday.strftime("%s"))
 
 
 def set_checkpoint():
@@ -97,7 +91,6 @@ def pp_json(json_thing, sort=True, indents=4):
 
 
 if __name__ == '__main__':
-    # init_checkpoint()                   # uncomment if you want not to download all screens
     checkpoint = get_checkpoint()
     folder_name = get_image_folder_name()
 
