@@ -54,7 +54,7 @@ def get_projects():
 
 
 def get_screens_from_zeplin(project):
-    screen_for_save = []
+    screens_for_save = []
     i = 1
     while i <= project['number_of_screens']:
         api_url = '{0}projects/{1}/screens?sort=created&limit=100&offset={2}' \
@@ -65,7 +65,7 @@ def get_screens_from_zeplin(project):
             screens = json.loads(response.content.decode('utf-8'))
             for screen in screens:
                 # print('id: {0}, name: {1}, updated: {2}'.format(screen['id'], screen['name'], screen['updated']))
-                screen_for_save.append([{
+                screens_for_save.append([{
                     'id': screen['id'],
                     'name': screen['name'],
                     'updated': screen['updated'],
@@ -76,7 +76,7 @@ def get_screens_from_zeplin(project):
         else:
             logging.error(f'The function was unable to get data: {response.content.decode("utf-8")}')
             sys.exit(1)
-    return screen_for_save
+    return screens_for_save
 
 
 # Что бы красиво выплюнуть json в консоль
