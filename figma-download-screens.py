@@ -2,12 +2,11 @@ import json
 import sys
 import requests
 import logging
-import datetime
 import os
 import hashlib
 
-from common import download
-from config import FIGMA_PROJECTS, FIGMA_API_TOKEN, BASE_FOLDER
+from common import download, get_image_folder_name
+from config import FIGMA_PROJECTS, FIGMA_API_TOKEN
 
 logging.basicConfig(
     format='Date-Time : %(asctime)s : Line No. : %(lineno)d : Function Name : %(funcName)s - %(message)s',
@@ -18,14 +17,6 @@ FIGMA_API_URL_BASE = 'https://api.figma.com/v1/'
 CHECKPOINT_FILE_NAME = 'figma-checkpoint.txt'
 
 FIGMA_HEADERS = {'X-FIGMA-TOKEN': '{0}'.format(FIGMA_API_TOKEN)}
-
-
-def get_image_folder_name():
-    if not os.path.exists(BASE_FOLDER):
-        os.mkdir(BASE_FOLDER)
-
-    today = datetime.date.today()
-    return os.sep.join([BASE_FOLDER, today.isoformat()])
 
 
 def get_checkpoints():

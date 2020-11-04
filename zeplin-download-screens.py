@@ -3,11 +3,10 @@ import sys
 import requests
 import logging
 import time
-import datetime
 import os
 
-from common import download
-from config import ZEPLIN_API_TOKEN, BASE_FOLDER
+from common import download, get_image_folder_name
+from config import ZEPLIN_API_TOKEN
 
 logging.basicConfig(
     format='Date-Time : %(asctime)s : Line No. : %(lineno)d : Function Name : %(funcName)s - %(message)s',
@@ -21,14 +20,6 @@ ZEPLIN_HEADERS = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer {0}'.format(ZEPLIN_API_TOKEN)
 }
-
-
-def get_image_folder_name():
-    if not os.path.exists(BASE_FOLDER):
-        os.mkdir(BASE_FOLDER)
-
-    today = datetime.date.today()
-    return os.sep.join([BASE_FOLDER, today.isoformat()])
 
 
 def get_checkpoint():
