@@ -82,7 +82,7 @@ def get_project_frames(project_id, project_name):
     return frames
 
 
-def download_frame(project_id, frame_id, page_name, frame_name, folder_name, scale_ratio=2):
+def download_frame(project_id, project_name, frame_id, page_name, frame_name, folder_name, scale_ratio=2):
     api_url = '{0}images/{1}?ids={2}&scale=2&format=png'.format(FIGMA_API_URL_BASE, project_id, frame_id)
     file_name = '{0}_{1}_{2}_{3}@2x.png'.format(project_name, page_name, frame_name, frame_id.replace(':', '_'))
 
@@ -103,12 +103,11 @@ if __name__ == '__main__':
     folder_name = get_image_folder_name()
     checkpoints = get_checkpoints()
 
-    for projectKey in FIGMA_PROJECTS.keys():
-        project_name = projectKey
-        project_id = FIGMA_PROJECTS[projectKey]
+    for project_name in FIGMA_PROJECTS.keys():
+        project_id = FIGMA_PROJECTS[project_name]
         frames = get_project_frames(project_id, project_name)
         for frame in frames:
-            result = download_frame(projectKey, frame['id'], frame['page_name'],
+            result = download_frame(project_id, project_name, frame['id'], frame['page_name'],
                                     frame['frame_name'], folder_name)
             print(result)
             if result:

@@ -107,7 +107,6 @@ def pp_json(json_thing, sort=True, indents=4):
 
 if __name__ == '__main__':
     # init_checkpoint()                   # uncomment if you want not to download all screens
-
     checkpoint = get_checkpoint()
     folder_name = get_image_folder_name()
 
