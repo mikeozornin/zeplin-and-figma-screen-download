@@ -1,0 +1,9 @@
+BASE_FOLDER = 'images'
+
+FIGMA_PROJECTS = {
+    'Name': 'ID',
+}
+
+FIGMA_API_TOKEN: str = "%token%"
+
+ZEPLIN_API_TOKEN: str = "%token%"

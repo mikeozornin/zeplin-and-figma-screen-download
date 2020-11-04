@@ -1,0 +1,9 @@
+/config.py
+.idea
+.venv
+__pycache__
+.vscode
+images
+venv
+figma-checkpoint.txt
+zeplin-checkpoint.txt
