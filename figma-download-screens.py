@@ -25,6 +25,7 @@ def get_checkpoints():
         for line in file.readlines():
             checkpoints.add(line.strip())
         return checkpoints
+    return checkpoints
 
 
 def save_checkpoints(checkpoints):
