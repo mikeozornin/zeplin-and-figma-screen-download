@@ -3,6 +3,7 @@ import sys
 import requests
 import logging
 import time
+import os.path
 
 from common import download, get_image_folder_name
 from config import ZEPLIN_API_TOKEN
@@ -22,9 +23,12 @@ ZEPLIN_HEADERS = {
 
 
 def get_checkpoint():
-    with open(CHECKPOINT_FILE_NAME, 'r') as file:
-        checkpoint = file.read()
-        return int(checkpoint)
+    if os.path.isfile(CHECKPOINT_FILE_NAME):
+        with open(CHECKPOINT_FILE_NAME, 'r') as file:
+            checkpoint = file.read()
+            return int(checkpoint)
+    else:
+        return 0
 
 
 def set_checkpoint():
