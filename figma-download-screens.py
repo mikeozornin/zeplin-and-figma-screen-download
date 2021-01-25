@@ -64,7 +64,7 @@ def get_project_frames(project_id, project_name):
     for page in project_json['document']['children']:
         page_name = page['name']
         for frame in page['children']:
-            if frame['type'] == 'FRAME':
+            if frame['type'] == 'FRAME' or frame['type'] == 'GROUP':
                 frames.append({
                     'id': frame["id"],
                     'projectName': project_name,
