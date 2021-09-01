@@ -1,5 +1,6 @@
 import json
 import sys
+import re
 import requests
 import logging
 import os
@@ -64,7 +65,7 @@ def get_project_frames(project_id, project_name):
     for page in project_json['document']['children']:
         page_name = page['name']
         for frame in page['children']:
-            if frame['type'] == 'FRAME' or frame['type'] == 'GROUP':
+            if frame['type'] in ['FRAME', 'GROUP', 'COMPONENT', 'COMPONENT_SET']:
                 frames.append({
                     'id': frame["id"],
                     'projectName': project_name,
@@ -76,7 +77,8 @@ def get_project_frames(project_id, project_name):
 
 def download_frame(project_id, project_name, frame_id, page_name, frame_name, folder_name, scale_ratio=2):
     api_url = '{0}images/{1}?ids={2}&scale=2&format=png'.format(FIGMA_API_URL_BASE, project_id, frame_id)
-    file_name = '{0}_{1}_{2}_{3}@2x.png'.format(project_name, page_name, frame_name, frame_id.replace(':', '_'))
+    file_name = '{0}_{1}_{2}_{3}'.format(project_name, page_name, frame_name, frame_id)
+    file_name = '{0}.@2x.png'.format(re.sub('[^A-Za-z0-9]+', '_', file_name))
 
     response = requests.get(api_url, headers=FIGMA_HEADERS)
 
